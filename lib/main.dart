@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const WaifuApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class WaifuApp extends StatelessWidget {
+  const WaifuApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Waifu2xFlutter',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const WaifuHome(title: 'Upscale an image'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class WaifuHome extends StatefulWidget {
+  const WaifuHome({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<WaifuHome> createState() => _WaifuHomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _WaifuHomeState extends State<WaifuHome> {
   int _counter = 0;
 
   void _incrementCounter() {
