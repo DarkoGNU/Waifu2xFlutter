@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-const _pickers = [
-  _GalleryPicker(),
-];
+import 'package:image_picker/image_picker.dart';
 
 class TabSelector extends StatelessWidget {
   const TabSelector({Key? key}) : super(key: key);
@@ -10,7 +7,7 @@ class TabSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: _pickers.length,
+      length: 2,
       child: Builder(builder: (BuildContext context) {
         final TabController tabController = DefaultTabController.of(context)!;
 
@@ -22,19 +19,18 @@ class TabSelector extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            bottom: TabBar(
-              tabs: _pickers.map((picker) => Tab(text: picker.label)).toList(),
+            title: const TabBar(
+              tabs: [
+                Tab(text: "Gallery"),
+                Tab(text: "URL"),
+              ],
             ),
           ),
-          body: TabBarView(
-            children: _pickers.map((picker) {
-              return Center(
-                child: Text(
-                  '${picker.label} Tab',
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              );
-            }).toList(),
+          body: const TabBarView(
+            children: [
+              _GalleryPicker(),
+              _UrlPicker(),
+            ],
           ),
         );
       }),
@@ -43,8 +39,6 @@ class TabSelector extends StatelessWidget {
 }
 
 class _GalleryPicker extends StatefulWidget {
-  final label = "Gallery";
-
   const _GalleryPicker({Key? key}) : super(key: key);
 
   @override
@@ -52,6 +46,50 @@ class _GalleryPicker extends StatefulWidget {
 }
 
 class _GalleryPickerState extends State<_GalleryPicker> {
+  final ImagePicker _picker = ImagePicker();
+
+  List<XFile>? _images;
+  int get _imagesCount => _images?.length ?? 0;
+
+  void _handleButtonPress() async {
+    List<XFile>? newImages = await _picker.pickMultiImage();
+
+    setState(() {
+      _images = newImages;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          MaterialButton(
+            color: Colors.blue,
+            child: const Text("Pick image from gallery"),
+            onPressed: () => setState(() => _handleButtonPress()),
+          ),
+          Text(
+            "$_imagesCount images picked",
+            style: const TextStyle(fontSize: 20),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _UrlPicker extends StatefulWidget {
+  const _UrlPicker({Key? key}) : super(key: key);
+
+  @override
+  _UrlPickerState createState() => _UrlPickerState();
+}
+
+class _UrlPickerState extends State<_UrlPicker> {
   @override
   Widget build(BuildContext context) {
     return Container();

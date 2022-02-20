@@ -23,6 +23,7 @@ dev_dependencies:
   # encourage good coding practices.
   flutter_lints: ^1.0.0
 
+  image_picker: ^0.8.4
 
 flutter:
 
