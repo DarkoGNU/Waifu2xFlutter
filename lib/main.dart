@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'selectors.dart';
+import 'Pickers/tab_selector.dart';
 
 void main() {
   runApp(const WaifuApp());
