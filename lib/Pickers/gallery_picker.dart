@@ -19,6 +19,17 @@ class _GalleryPickerState extends State<GalleryPicker>
   List<XFile>? _images;
   int get _imagesCount => _images?.length ?? 0;
 
+  String get _countString {
+    switch (_imagesCount) {
+      case 0:
+        return "No images selected";
+      case 1:
+        return "1 image selected";
+      default:
+        return "$_imagesCount images selected";
+    }
+  }
+
   Future<void> _handleButtonPress() async {
     List<XFile>? newImages = await _picker.pickMultiImage();
 
@@ -56,7 +67,6 @@ class _GalleryPickerState extends State<GalleryPicker>
             ),
           );
         }
-
         return Container(
           padding: const EdgeInsets.all(5.0),
           child: Column(
@@ -65,13 +75,13 @@ class _GalleryPickerState extends State<GalleryPicker>
               MaterialButton(
                 color: Colors.blue,
                 child: const Text(
-                  "Pick image from gallery",
+                  "Pick images from gallery",
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: _handleButtonPress,
               ),
               Text(
-                "$_imagesCount images picked",
+                _countString,
                 style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),

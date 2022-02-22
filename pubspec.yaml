@@ -23,7 +23,11 @@ dev_dependencies:
   # encourage good coding practices.
   flutter_lints: ^1.0.0
 
+  # Used for picking images
   image_picker: ^0.8.4
+
+  # Used for validating URLs
+  validators: ^3.0.0
 
 flutter:
 
