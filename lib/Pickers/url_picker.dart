@@ -15,6 +15,19 @@ class _UrlPickerState extends State<UrlPicker>
   @override
   bool get wantKeepAlive => _links.isNotEmpty;
 
+  int get _linksCount => _links.length;
+
+  String get _countString {
+    switch (_linksCount) {
+      case 0:
+        return "No links selected";
+      case 1:
+        return "1 link selected";
+      default:
+        return "$_linksCount links selected";
+    }
+  }
+
   final _textController = TextEditingController();
 
   void _addUrl(String text) {
@@ -24,6 +37,7 @@ class _UrlPickerState extends State<UrlPicker>
 
     setState(() {
       _links.add(text);
+      _textController.clear();
     });
   }
 
@@ -31,20 +45,30 @@ class _UrlPickerState extends State<UrlPicker>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return  Row(
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Column(
         children: [
-          Flexible(
-            child: TextField(
-              controller: _textController,
-              onSubmitted: _addUrl,
-              decoration: const InputDecoration.collapsed(hintText: 'Image link'),
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: TextField(
+                  controller: _textController,
+                  onSubmitted: _addUrl,
+                  decoration:
+                      const InputDecoration.collapsed(hintText: 'Enter your link here'),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.send),
+                onPressed: () => _addUrl(_textController.text),
+              ),
+            ],
           ),
-          IconButton(
-            icon: const Icon(Icons.send),
-            onPressed: () => _addUrl(_textController.text),
-          ),
+          Text(_countString),
         ],
-      );
+      ),
+    );
   }
 }

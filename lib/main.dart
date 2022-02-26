@@ -15,6 +15,9 @@ class WaifuApp extends StatelessWidget {
       title: 'Waifu2xFlutter',
       theme: ThemeData(
         primarySwatch: Colors.pink,
+        textTheme: Theme.of(context).textTheme.apply(
+              fontSizeDelta: 2.0,
+            ),
       ),
       home: const WaifuHome(title: 'Upscale an image'),
     );
@@ -31,14 +34,6 @@ class WaifuHome extends StatefulWidget {
 }
 
 class _WaifuHomeState extends State<WaifuHome> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -11,8 +11,6 @@ class TabSelector extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Builder(builder: (BuildContext context) {
-        final TabController tabController = DefaultTabController.of(context)!;
-
         return Scaffold(
           appBar: AppBar(
             title: const TabBar(

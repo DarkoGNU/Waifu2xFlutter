@@ -67,7 +67,7 @@ class _GalleryPickerState extends State<GalleryPicker>
             ),
           );
         }
-        return Container(
+        return Padding(
           padding: const EdgeInsets.all(5.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -76,13 +76,11 @@ class _GalleryPickerState extends State<GalleryPicker>
                 color: Colors.blue,
                 child: const Text(
                   "Pick images from gallery",
-                  style: TextStyle(fontSize: 18),
                 ),
                 onPressed: _handleButtonPress,
               ),
               Text(
                 _countString,
-                style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
             ],
