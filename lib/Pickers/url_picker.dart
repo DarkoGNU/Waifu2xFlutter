@@ -47,7 +47,42 @@ class _UrlPickerState extends State<UrlPicker>
     });
   }
 
-  Widget get _urlInfo {
+  Future<void> _showUrlList() async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Entered links"),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView(
+              shrinkWrap: true,
+              children: _links
+                  .map(
+                    (entry) => Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(entry),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text("Clear"),
+              onPressed: _clearLinks,
+            ),
+            TextButton(
+              child: const Text("Return"),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildUrlInfo() {
     if (_links.isEmpty) {
       return SizedBox(
         height: 25,
@@ -69,7 +104,7 @@ class _UrlPickerState extends State<UrlPicker>
           child: MaterialButton(
             color: Colors.blue,
             child: const Text("Show"),
-            onPressed: _clearLinks,
+            onPressed: _showUrlList,
           ),
         ),
         const SizedBox(width: 10),
@@ -113,7 +148,7 @@ class _UrlPickerState extends State<UrlPicker>
             ],
           ),
           const SizedBox(height: 5.0),
-          _urlInfo,
+          _buildUrlInfo(),
         ],
       ),
     );
