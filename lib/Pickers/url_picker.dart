@@ -10,7 +10,7 @@ class UrlPicker extends StatefulWidget {
 
 class _UrlPickerState extends State<UrlPicker>
     with AutomaticKeepAliveClientMixin {
-  Set<String> _links = {};
+  final Set<String> _links = {};
 
   @override
   bool get wantKeepAlive => _links.isNotEmpty;
@@ -41,6 +41,12 @@ class _UrlPickerState extends State<UrlPicker>
     });
   }
 
+  void _clearLinks() {
+    setState(() {
+      _links.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -50,14 +56,16 @@ class _UrlPickerState extends State<UrlPicker>
       child: Column(
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
                 child: TextField(
                   controller: _textController,
                   onSubmitted: _addUrl,
-                  decoration:
-                      const InputDecoration.collapsed(hintText: 'Enter your link here'),
+                  decoration: const InputDecoration(
+                      hintText: 'Enter your link here',
+                      border: OutlineInputBorder(),
+                      isDense: true,
+                      contentPadding: EdgeInsets.all(10.0)),
                 ),
               ),
               IconButton(
@@ -66,7 +74,44 @@ class _UrlPickerState extends State<UrlPicker>
               ),
             ],
           ),
-          Text(_countString),
+          const SizedBox(height: 5.0),
+          Builder(builder: (context) {
+            if (_links.isNotEmpty) {
+              return Row(
+                children: [
+                  Flexible(
+                    child: Text(_countString),
+                  ),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    height: 25,
+                    child: MaterialButton(
+                      color: Colors.blue,
+                      child: const Text("Show"),
+                      onPressed: _clearLinks,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    height: 25,
+                    child: MaterialButton(
+                      color: Colors.blue,
+                      child: const Text("Clear"),
+                      onPressed: _clearLinks,
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return SizedBox(
+                height: 25,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(_countString),
+                ),
+              );
+            }
+          }),
         ],
       ),
     );
