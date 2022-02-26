@@ -47,6 +47,44 @@ class _UrlPickerState extends State<UrlPicker>
     });
   }
 
+  Widget get _urlInfo {
+    if (_links.isEmpty) {
+      return SizedBox(
+        height: 25,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(_countString),
+        ),
+      );
+    }
+
+    return Row(
+      children: [
+        Flexible(
+          child: Text(_countString),
+        ),
+        const SizedBox(width: 10),
+        SizedBox(
+          height: 25,
+          child: MaterialButton(
+            color: Colors.blue,
+            child: const Text("Show"),
+            onPressed: _clearLinks,
+          ),
+        ),
+        const SizedBox(width: 10),
+        SizedBox(
+          height: 25,
+          child: MaterialButton(
+            color: Colors.blue,
+            child: const Text("Clear"),
+            onPressed: _clearLinks,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -75,43 +113,7 @@ class _UrlPickerState extends State<UrlPicker>
             ],
           ),
           const SizedBox(height: 5.0),
-          Builder(builder: (context) {
-            if (_links.isNotEmpty) {
-              return Row(
-                children: [
-                  Flexible(
-                    child: Text(_countString),
-                  ),
-                  const SizedBox(width: 10),
-                  SizedBox(
-                    height: 25,
-                    child: MaterialButton(
-                      color: Colors.blue,
-                      child: const Text("Show"),
-                      onPressed: _clearLinks,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  SizedBox(
-                    height: 25,
-                    child: MaterialButton(
-                      color: Colors.blue,
-                      child: const Text("Clear"),
-                      onPressed: _clearLinks,
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return SizedBox(
-                height: 25,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(_countString),
-                ),
-              );
-            }
-          }),
+          _urlInfo,
         ],
       ),
     );
