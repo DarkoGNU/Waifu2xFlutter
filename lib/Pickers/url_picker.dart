@@ -58,42 +58,42 @@ class _UrlPickerState extends State<UrlPicker>
 
   Widget _buildUrlInfo() {
     if (_links.isEmpty) {
-      return Align(
-        heightFactor: 1.3,
-        alignment: Alignment.centerLeft,
-        child: Text(_countString),
+      return SizedBox(
+        height: 25,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(_countString),
+        ),
       );
     }
 
-    return Row(
-      children: [
-        Flexible(
-          child: Text(_countString),
-        ),
-        const SizedBox(width: 10),
-        SizedBox(
-          height: 25,
-          child: MaterialButton(
+    return SizedBox(
+      height: 25,
+      child: Row(
+        children: [
+          Flexible(
+            child: Text(_countString),
+          ),
+          const SizedBox(width: 10),
+          MaterialButton(
             color: Colors.blue,
             child: const Text("Show"),
             onPressed: () => showDialog(
                 context: context,
+                // The pop-up is handled by the UrlListPopUp class
                 builder: (context) => UrlListPopUp(
                       links: _links,
                       changeCallback: _rebuildWidget,
                     )),
           ),
-        ),
-        const SizedBox(width: 10),
-        SizedBox(
-          height: 25,
-          child: MaterialButton(
+          const SizedBox(width: 10),
+          MaterialButton(
             color: Colors.blue,
             child: const Text("Clear"),
             onPressed: _clearLinks,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

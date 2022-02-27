@@ -39,6 +39,7 @@ class _GalleryPickerState extends State<GalleryPicker>
   }
 
   // Only for Android
+  // ImagePicker needs to retrieve lost images after the app is killed
   Future<void> _retrieveLostData() async {
     final LostDataResponse response = await _picker.retrieveLostData();
     if (response.isEmpty || response.files == null) {

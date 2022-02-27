@@ -73,6 +73,8 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
       return;
     }
 
+    // Future() - a workaround for nested pop-up created by a PopupMenuItem
+    // Without it, the pop-up doesn't appear
     Future(() {
       _textController.text = link;
 
