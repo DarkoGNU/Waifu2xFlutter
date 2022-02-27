@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
 
@@ -42,22 +44,46 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
     widget.changeCallback();
   }
 
-  Future<void> _showEditDialog(String link) async {
-    return showDialog(
-      context: context,
-      builder: (context) => const AlertDialog(
-        title: Text("Edit a link"),
-        content: Text("Test"),
-      ),
-    );
+  void _editLink(String original, String edited) {
+    setState(() {
+      widget.links.remove(original);
+      widget.links.add(edited);
+      // no need for changeCallback() - link count doesn't change
+    });
+
+    Navigator.pop(context);
   }
 
-  void _handleTap(_ButtonChoice choice, String link) {
+  void _handleTap(_ButtonChoice choice, String link) async {
     if (choice == _ButtonChoice.remove) {
       _removeLink(link);
       return;
     }
-     _showEditDialog(link);
+
+    Future(() {
+      final textController = TextEditingController(text: link);
+      final formKey = GlobalKey<FormState>();
+
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Edit a link"),
+          content: TextFormField(
+            key: formKey,
+            controller: textController,
+            validator: (value) => isURL(value) ? null : "Invalid URL",
+            onFieldSubmitted: null,
+          ),
+          actions: [
+            TextButton(
+              child: const Text("Return"),
+              // onPressed: () => _editLink(link, textController.text),
+              onPressed: () => formKey.currentState!.validate(),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _buildButton(String link) {
