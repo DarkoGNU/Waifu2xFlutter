@@ -31,6 +31,12 @@ class _UrlPickerState extends State<UrlPicker>
 
   final _textController = TextEditingController();
 
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
   void _addUrl(String text) {
     if (!isURL(text)) {
       return;
@@ -52,12 +58,10 @@ class _UrlPickerState extends State<UrlPicker>
 
   Widget _buildUrlInfo() {
     if (_links.isEmpty) {
-      return SizedBox(
-        height: 25,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(_countString),
-        ),
+      return Align(
+        heightFactor: 1.3,
+        alignment: Alignment.centerLeft,
+        child: Text(_countString),
       );
     }
 

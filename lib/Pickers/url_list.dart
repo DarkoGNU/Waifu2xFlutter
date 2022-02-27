@@ -32,6 +32,15 @@ class UrlListPopUp extends StatefulWidget {
 }
 
 class _UrlListPopUpState extends State<UrlListPopUp> {
+  final _textController = TextEditingController();
+  final _formKey = GlobalKey<FormFieldState>();
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
   void _clearLinks() {
     setState(() => widget.links.clear());
 
@@ -44,14 +53,14 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
     widget.changeCallback();
   }
 
-  void _editLink(String original, String edited, bool Function() validator) {
-    if (!validator()) {
+  void _editLink(String original) {
+    if (!_formKey.currentState!.validate()) {
       return;
     }
 
     setState(() {
       widget.links.remove(original);
-      widget.links.add(edited);
+      widget.links.add(_textController.text);
       // no need for changeCallback() - link count doesn't change
     });
 
@@ -65,25 +74,22 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
     }
 
     Future(() {
-      final textController = TextEditingController(text: link);
-      final formKey = GlobalKey<FormFieldState>();
+      _textController.text = link;
 
       return showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text("Edit a link"),
           content: TextFormField(
-            key: formKey,
-            controller: textController,
+            key: _formKey,
+            controller: _textController,
             validator: (value) => isURL(value) ? null : "Invalid URL",
-            onFieldSubmitted: (value) => _editLink(
-                link, textController.text, formKey.currentState!.validate),
+            onFieldSubmitted: (value) => _editLink(link),
           ),
           actions: [
             TextButton(
               child: const Text("Return"),
-              onPressed: () => _editLink(
-                  link, textController.text, formKey.currentState!.validate),
+              onPressed: () => _editLink(link),
             ),
           ],
         ),

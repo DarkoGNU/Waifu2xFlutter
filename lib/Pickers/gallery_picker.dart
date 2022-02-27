@@ -14,19 +14,19 @@ class _GalleryPickerState extends State<GalleryPicker>
   final ImagePicker _picker = ImagePicker();
 
   @override
-  bool get wantKeepAlive => _imagesCount != 0;
+  bool get wantKeepAlive => _images?.isNotEmpty ?? false;
 
   List<XFile>? _images;
-  int get _imagesCount => _images?.length ?? 0;
+  int get _imageCount => _images?.length ?? 0;
 
   String get _countString {
-    switch (_imagesCount) {
+    switch (_imageCount) {
       case 0:
         return "No images selected";
       case 1:
         return "1 image selected";
       default:
-        return "$_imagesCount images selected";
+        return "$_imageCount images selected";
     }
   }
 
