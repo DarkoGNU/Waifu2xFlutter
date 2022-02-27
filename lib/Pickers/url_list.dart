@@ -44,7 +44,11 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
     widget.changeCallback();
   }
 
-  void _editLink(String original, String edited) {
+  void _editLink(String original, String edited, bool Function() validator) {
+    if (!validator()) {
+      return;
+    }
+
     setState(() {
       widget.links.remove(original);
       widget.links.add(edited);
@@ -62,7 +66,7 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
 
     Future(() {
       final textController = TextEditingController(text: link);
-      final formKey = GlobalKey<FormState>();
+      final formKey = GlobalKey<FormFieldState>();
 
       return showDialog(
         context: context,
@@ -72,13 +76,14 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
             key: formKey,
             controller: textController,
             validator: (value) => isURL(value) ? null : "Invalid URL",
-            onFieldSubmitted: null,
+            onFieldSubmitted: (value) => _editLink(
+                link, textController.text, formKey.currentState!.validate),
           ),
           actions: [
             TextButton(
               child: const Text("Return"),
-              // onPressed: () => _editLink(link, textController.text),
-              onPressed: () => formKey.currentState!.validate(),
+              onPressed: () => _editLink(
+                  link, textController.text, formKey.currentState!.validate),
             ),
           ],
         ),
