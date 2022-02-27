@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
+import 'url_list.dart';
 
 class UrlPicker extends StatefulWidget {
   const UrlPicker({Key? key}) : super(key: key);
@@ -73,7 +74,7 @@ class _UrlPickerState extends State<UrlPicker>
             child: const Text("Show"),
             onPressed: () => showDialog(
                 context: context,
-                builder: (context) => _UrlListPopUp(
+                builder: (context) => UrlListPopUp(
                       links: _links,
                       changeCallback: _rebuildWidget,
                     )),
@@ -123,57 +124,6 @@ class _UrlPickerState extends State<UrlPicker>
           _buildUrlInfo(),
         ],
       ),
-    );
-  }
-}
-
-class _UrlListPopUp extends StatefulWidget {
-  const _UrlListPopUp(
-      {Key? key, required this.links, required this.changeCallback})
-      : super(key: key);
-
-  final Set<String> links;
-  final VoidCallback changeCallback;
-
-  @override
-  _UrlListPopUpState createState() => _UrlListPopUpState();
-}
-
-class _UrlListPopUpState extends State<_UrlListPopUp> {
-  void _clearLinks() {
-    setState(() => widget.links.clear());
-
-    widget.changeCallback();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text("Entered links"),
-      content: SizedBox(
-        width: double.maxFinite,
-        child: ListView(
-          shrinkWrap: true,
-          children: widget.links
-              .map(
-                (entry) => Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(entry),
-                ),
-              )
-              .toList(),
-        ),
-      ),
-      actions: [
-        TextButton(
-          child: const Text("Clear"),
-          onPressed: _clearLinks,
-        ),
-        TextButton(
-          child: const Text("Return"),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ],
     );
   }
 }
