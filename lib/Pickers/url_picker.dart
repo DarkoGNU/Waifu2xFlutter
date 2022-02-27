@@ -42,44 +42,11 @@ class _UrlPickerState extends State<UrlPicker>
   }
 
   void _clearLinks() {
-    setState(() {
-      _links.clear();
-    });
+    setState(() => _links.clear());
   }
 
-  Future<void> _showUrlList() async {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("Entered links"),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: ListView(
-              shrinkWrap: true,
-              children: _links
-                  .map(
-                    (entry) => Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(entry),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-          actions: [
-            TextButton(
-              child: const Text("Clear"),
-              onPressed: _clearLinks,
-            ),
-            TextButton(
-              child: const Text("Return"),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ],
-        );
-      },
-    );
+  void _rebuildWidget() {
+    setState(() {});
   }
 
   Widget _buildUrlInfo() {
@@ -104,7 +71,12 @@ class _UrlPickerState extends State<UrlPicker>
           child: MaterialButton(
             color: Colors.blue,
             child: const Text("Show"),
-            onPressed: _showUrlList,
+            onPressed: () => showDialog(
+                context: context,
+                builder: (context) => _UrlListPopUp(
+                      links: _links,
+                      changeCallback: _rebuildWidget,
+                    )),
           ),
         ),
         const SizedBox(width: 10),
@@ -151,6 +123,57 @@ class _UrlPickerState extends State<UrlPicker>
           _buildUrlInfo(),
         ],
       ),
+    );
+  }
+}
+
+class _UrlListPopUp extends StatefulWidget {
+  const _UrlListPopUp(
+      {Key? key, required this.links, required this.changeCallback})
+      : super(key: key);
+
+  final Set<String> links;
+  final VoidCallback changeCallback;
+
+  @override
+  _UrlListPopUpState createState() => _UrlListPopUpState();
+}
+
+class _UrlListPopUpState extends State<_UrlListPopUp> {
+  void _clearLinks() {
+    setState(() => widget.links.clear());
+
+    widget.changeCallback();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text("Entered links"),
+      content: SizedBox(
+        width: double.maxFinite,
+        child: ListView(
+          shrinkWrap: true,
+          children: widget.links
+              .map(
+                (entry) => Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(entry),
+                ),
+              )
+              .toList(),
+        ),
+      ),
+      actions: [
+        TextButton(
+          child: const Text("Clear"),
+          onPressed: _clearLinks,
+        ),
+        TextButton(
+          child: const Text("Return"),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ],
     );
   }
 }
