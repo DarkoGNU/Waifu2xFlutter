@@ -31,6 +31,7 @@ class _UrlPickerState extends State<UrlPicker>
   }
 
   final _textController = TextEditingController();
+  final _formKey = GlobalKey<FormFieldState>();
 
   @override
   void dispose() {
@@ -39,7 +40,7 @@ class _UrlPickerState extends State<UrlPicker>
   }
 
   void _addUrl(String text) {
-    if (!isURL(text)) {
+    if (!_formKey.currentState!.validate()) {
       return;
     }
 
@@ -107,9 +108,11 @@ class _UrlPickerState extends State<UrlPicker>
           Row(
             children: [
               Flexible(
-                child: TextField(
+                child: TextFormField(
+                  key: _formKey,
                   controller: _textController,
-                  onSubmitted: _addUrl,
+                  validator: (value) => isURL(value) ? null : "Invalid URL",
+                  onFieldSubmitted: _addUrl,
                   decoration: const InputDecoration(
                       hintText: 'Enter your link here',
                       border: OutlineInputBorder(),

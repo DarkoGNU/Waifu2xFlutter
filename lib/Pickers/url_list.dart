@@ -67,7 +67,7 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
     Navigator.pop(context);
   }
 
-  void _handleTap(_ButtonChoice choice, String link) async {
+  void _handleTap(_ButtonChoice choice, String link) {
     if (choice == _ButtonChoice.remove) {
       _removeLink(link);
       return;
@@ -88,7 +88,7 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
               key: _formKey,
               controller: _textController,
               validator: (value) => isURL(value) ? null : "Invalid URL",
-              onFieldSubmitted: (value) => _editLink(link),
+              onFieldSubmitted: (_) => _editLink(link),
             ),
           ),
           actions: [
