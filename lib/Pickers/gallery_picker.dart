@@ -69,7 +69,7 @@ class _GalleryPickerState extends State<GalleryPicker>
           );
         }
         return Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

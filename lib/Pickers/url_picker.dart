@@ -101,7 +101,7 @@ class _UrlPickerState extends State<UrlPicker>
     super.build(context);
 
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
       child: Column(
         children: [
           Row(
@@ -119,6 +119,7 @@ class _UrlPickerState extends State<UrlPicker>
               ),
               IconButton(
                 icon: const Icon(Icons.send),
+                alignment: Alignment.centerRight,
                 color: iconColor(context),
                 onPressed: () => _addUrl(_textController.text),
               ),
