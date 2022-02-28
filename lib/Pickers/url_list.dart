@@ -82,11 +82,14 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text("Edit a link"),
-          content: TextFormField(
-            key: _formKey,
-            controller: _textController,
-            validator: (value) => isURL(value) ? null : "Invalid URL",
-            onFieldSubmitted: (value) => _editLink(link),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: TextFormField(
+              key: _formKey,
+              controller: _textController,
+              validator: (value) => isURL(value) ? null : "Invalid URL",
+              onFieldSubmitted: (value) => _editLink(link),
+            ),
           ),
           actions: [
             TextButton(
