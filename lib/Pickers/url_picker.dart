@@ -117,9 +117,12 @@ class _UrlPickerState extends State<UrlPicker>
                     hintText: 'Enter your link here',
                     border: const OutlineInputBorder(),
                     isDense: true,
-                    contentPadding: const EdgeInsets.all(10.0),
+                    contentPadding:
+                        const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 10.0),
+                    suffixIconConstraints: const BoxConstraints(maxHeight: 40),
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.send),
+                      iconSize: 24,
                       color: iconColor(context),
                       onPressed: () => _addUrl(_textController.text),
                     ),
