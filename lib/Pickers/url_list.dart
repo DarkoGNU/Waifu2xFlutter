@@ -120,7 +120,15 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: Text(entry)),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Text(
+                    entry,
+                    maxLines: 1,
+                  ),
+                ),
+              ),
               Center(
                 heightFactor: 0.4,
                 child: _buildButton(entry),

@@ -21,5 +21,5 @@ Color iconColor(BuildContext context) {
     return Colors.lightBlue;
   }
 
-  return Colors.red;
+  return Colors.red; // TODO: pick a color for dark theme
 }
