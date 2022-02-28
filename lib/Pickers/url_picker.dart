@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
+import 'package:waifu2x_flutter/themes.dart';
 import 'url_list.dart';
 
 class UrlPicker extends StatefulWidget {
@@ -75,8 +76,7 @@ class _UrlPickerState extends State<UrlPicker>
             child: Text(_countString),
           ),
           const SizedBox(width: 10),
-          MaterialButton(
-            color: Colors.blue,
+          ElevatedButton(
             child: const Text("Show"),
             onPressed: () => showDialog(
                 context: context,
@@ -87,8 +87,7 @@ class _UrlPickerState extends State<UrlPicker>
                     )),
           ),
           const SizedBox(width: 10),
-          MaterialButton(
-            color: Colors.blue,
+          ElevatedButton(
             child: const Text("Clear"),
             onPressed: _clearLinks,
           ),
@@ -120,6 +119,7 @@ class _UrlPickerState extends State<UrlPicker>
               ),
               IconButton(
                 icon: const Icon(Icons.send),
+                color: iconColor(context),
                 onPressed: () => _addUrl(_textController.text),
               ),
             ],

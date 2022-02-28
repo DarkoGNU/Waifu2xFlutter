@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waifu2x_flutter/themes.dart';
 
 import 'Pickers/tab_selector.dart';
 
@@ -13,13 +14,8 @@ class WaifuApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Waifu2xFlutter',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        textTheme: Theme.of(context).textTheme.apply(
-              fontSizeDelta: 2.0,
-            ),
-      ),
       home: const WaifuHome(title: 'Upscale an image'),
+      theme: mainTheme(context),
     );
   }
 }

@@ -73,8 +73,7 @@ class _GalleryPickerState extends State<GalleryPicker>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              MaterialButton(
-                color: Colors.blue,
+              ElevatedButton(
                 child: const Text(
                   "Pick images from gallery",
                 ),
