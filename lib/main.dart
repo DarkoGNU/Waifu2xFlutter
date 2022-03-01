@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:waifu2x_flutter/themes.dart';
+import 'package:waifu2x_flutter/themes.dart' as themes;
 
 import 'Pickers/tab_selector.dart';
 
@@ -19,9 +19,9 @@ class WaifuApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*return AdaptiveTheme(
-      light: lightTheme(context),
-      dark: darkTheme(context), // TODO: implement dark theme
+    return AdaptiveTheme(
+      light: themes.lightTheme,
+      dark: themes.darkTheme,
       initial: savedThemeMode,
       builder: (lightTheme, darkTheme) => MaterialApp(
         title: 'Waifu2xFlutter',
@@ -29,14 +29,6 @@ class WaifuApp extends StatelessWidget {
         darkTheme: darkTheme,
         home: const WaifuHome(title: 'Upscale an image'),
       ),
-    );*/
-
-    return MaterialApp(
-      title: 'Waifu2xFlutter',
-      theme: lightTheme(context),
-      darkTheme: darkTheme(context),
-      themeMode: ThemeMode.dark,
-      home: const WaifuHome(title: 'Upscale an image'),
     );
   }
 }

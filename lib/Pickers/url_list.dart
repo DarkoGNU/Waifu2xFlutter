@@ -122,7 +122,7 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Text(
                     entry,
                     maxLines: 1,

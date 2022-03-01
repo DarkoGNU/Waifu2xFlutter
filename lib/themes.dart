@@ -1,34 +1,18 @@
 import 'package:flutter/material.dart';
 
-TextTheme textTheme(BuildContext context, [double sizeDelta = 2.0]) {
-  return Theme.of(context).textTheme.apply(fontSizeDelta: 2.0);
-}
+const Color iconColor = Colors.lightBlue;
 
-ThemeData lightTheme(BuildContext context) {
-  return ThemeData(
-    brightness: Brightness.light,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.pink,
-      primary: Colors.pink,
-    ),
-    textTheme: textTheme(context),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(primary: Colors.lightBlue),
-    ),
-  );
-}
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.pink,
+    primary: Colors.pink,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(primary: Colors.lightBlue),
+  ),
+);
 
-ThemeData darkTheme(BuildContext context) {
-  return ThemeData(
-    brightness: Brightness.dark,
-    //textTheme: textTheme(context),
-  );
-}
-
-Color iconColor(BuildContext context) {
-  if (Theme.of(context).brightness == Brightness.light) {
-    return Colors.lightBlue;
-  }
-
-  return Colors.red; // TODO: pick a color for dark theme
-}
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+);
