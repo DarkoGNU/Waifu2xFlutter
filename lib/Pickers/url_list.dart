@@ -113,28 +113,28 @@ class _UrlListPopUpState extends State<UrlListPopUp> {
     );
   }
 
-  List<Padding> get _itemList => widget.links
+  List<Widget> get _itemList => widget.links
       .map(
-        (entry) => Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
+        (entry) => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     entry,
                     maxLines: 1,
                   ),
                 ),
               ),
-              Center(
-                heightFactor: 0.4,
-                child: _buildButton(entry),
-              ),
-            ],
-          ),
+            ),
+            Center(
+              heightFactor: 0.4,
+              child: _buildButton(entry),
+            ),
+          ],
         ),
       )
       .toList();
