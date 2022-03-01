@@ -18,6 +18,13 @@ ThemeData lightTheme(BuildContext context) {
   );
 }
 
+ThemeData darkTheme(BuildContext context) {
+  return ThemeData(
+    brightness: Brightness.dark,
+    //textTheme: textTheme(context),
+  );
+}
+
 Color iconColor(BuildContext context) {
   if (Theme.of(context).brightness == Brightness.light) {
     return Colors.lightBlue;

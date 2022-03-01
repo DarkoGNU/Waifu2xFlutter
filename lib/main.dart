@@ -19,9 +19,9 @@ class WaifuApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
+    /*return AdaptiveTheme(
       light: lightTheme(context),
-      dark: lightTheme(context), // TODO: implement dark theme
+      dark: darkTheme(context), // TODO: implement dark theme
       initial: savedThemeMode,
       builder: (lightTheme, darkTheme) => MaterialApp(
         title: 'Waifu2xFlutter',
@@ -29,6 +29,14 @@ class WaifuApp extends StatelessWidget {
         darkTheme: darkTheme,
         home: const WaifuHome(title: 'Upscale an image'),
       ),
+    );*/
+
+    return MaterialApp(
+      title: 'Waifu2xFlutter',
+      theme: lightTheme(context),
+      darkTheme: darkTheme(context),
+      themeMode: ThemeMode.dark,
+      home: const WaifuHome(title: 'Upscale an image'),
     );
   }
 }
