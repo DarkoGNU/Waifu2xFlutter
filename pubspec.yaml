@@ -29,6 +29,9 @@ dev_dependencies:
   # Used for validating URLs
   validators: ^3.0.0
 
+  # Used for theming
+  adaptive_theme: ^2.3.0
+
 flutter:
 
   # The following line ensures that the Material Icons font is
