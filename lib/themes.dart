@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-ThemeData mainTheme(BuildContext context) {
+TextTheme textTheme(BuildContext context, [double sizeDelta = 2.0]) {
+  return Theme.of(context).textTheme.apply(fontSizeDelta: 2.0);
+}
+
+ThemeData lightTheme(BuildContext context) {
   return ThemeData(
     brightness: Brightness.light,
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.pink,
       primary: Colors.pink,
     ),
-    textTheme: Theme.of(context).textTheme.apply(
-          fontSizeDelta: 2.0,
-        ),
+    textTheme: textTheme(context),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(primary: Colors.lightBlue),
     ),

@@ -15,7 +15,7 @@ class WaifuApp extends StatelessWidget {
     return MaterialApp(
       title: 'Waifu2xFlutter',
       home: const WaifuHome(title: 'Upscale an image'),
-      theme: mainTheme(context),
+      theme: lightTheme(context),
     );
   }
 }
