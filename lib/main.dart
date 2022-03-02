@@ -9,20 +9,20 @@ Future<void> main() async {
 
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
 
-  return runApp(WaifuApp(savedThemeMode: savedThemeMode!));
+  return runApp(WaifuApp(savedThemeMode: savedThemeMode));
 }
 
 class WaifuApp extends StatelessWidget {
-  const WaifuApp({Key? key, required this.savedThemeMode}) : super(key: key);
+  const WaifuApp({Key? key, this.savedThemeMode}) : super(key: key);
 
-  final AdaptiveThemeMode savedThemeMode;
+  final AdaptiveThemeMode? savedThemeMode;
 
   @override
   Widget build(BuildContext context) {
     return AdaptiveTheme(
       light: themes.lightTheme,
       dark: themes.darkTheme,
-      initial: savedThemeMode,
+      initial: savedThemeMode ?? AdaptiveThemeMode.system,
       builder: (lightTheme, darkTheme) => MaterialApp(
         title: 'Waifu2xFlutter',
         theme: lightTheme,
