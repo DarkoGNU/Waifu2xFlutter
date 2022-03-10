@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
-import 'package:waifu2x_flutter/themes.dart' as themes;
+import 'package:waifu2x_flutter/themes.dart' as theming;
 import 'url_list.dart';
 
 class UrlPicker extends StatefulWidget {
@@ -123,7 +123,7 @@ class _UrlPickerState extends State<UrlPicker>
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.send),
                       iconSize: 24,
-                      color: themes.iconColor,
+                      color: theming.iconColor,
                       onPressed: () => _addUrl(_textController.text),
                     ),
                   ),

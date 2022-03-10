@@ -32,6 +32,12 @@ dev_dependencies:
   # Used for theming
   adaptive_theme: ^2.3.0
 
+  # Used for settings
+  settings_ui: ^2.0.2
+
+  # Used for saving settings:
+  shared_preferences: ^2.0.13
+
 flutter:
 
   # The following line ensures that the Material Icons font is

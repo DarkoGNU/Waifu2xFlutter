@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:waifu2x_flutter/themes.dart' as themes;
+import 'package:flutter/material.dart';
+import 'package:waifu2x_flutter/themes.dart' as theming;
 
 import 'Pickers/tab_selector.dart';
+import 'Settings/settings.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,15 +14,15 @@ Future<void> main() async {
 }
 
 class WaifuApp extends StatelessWidget {
-  const WaifuApp({Key? key, this.savedThemeMode}) : super(key: key);
-
   final AdaptiveThemeMode? savedThemeMode;
+
+  const WaifuApp({Key? key, this.savedThemeMode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AdaptiveTheme(
-      light: themes.lightTheme,
-      dark: themes.darkTheme,
+      light: theming.lightTheme,
+      dark: theming.darkTheme,
       initial: savedThemeMode ?? AdaptiveThemeMode.system,
       builder: (lightTheme, darkTheme) => MaterialApp(
         title: 'Waifu2xFlutter',
@@ -33,21 +34,27 @@ class WaifuApp extends StatelessWidget {
   }
 }
 
-class WaifuHome extends StatefulWidget {
+class WaifuHome extends StatelessWidget {
+  final String title;
   const WaifuHome({Key? key, required this.title}) : super(key: key);
 
-  final String title;
-
-  @override
-  State<WaifuHome> createState() => _WaifuHomeState();
-}
-
-class _WaifuHomeState extends State<WaifuHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: IconButton(
+              icon: const Icon(Icons.more_vert),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingsPage())),
+            ),
+          ),
+        ],
       ),
       body: const TabSelector(),
     );
