@@ -3,7 +3,9 @@ import 'package:settings_ui/settings_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({Key? key, required this.preferences}) : super(key: key);
+
+  final SharedPreferences preferences;
 
   @override
   Widget build(BuildContext context) {
