@@ -21,13 +21,12 @@ class SettingsPage extends StatelessWidget {
               SettingsTile.navigation(
                 leading: const Icon(Icons.language),
                 title: const Text("Language"),
-                value: const Text("English"),
+                value: Text(preferences.getStringList("lang")![1]),
               ),
-              SettingsTile.switchTile(
-                onToggle: (value) {},
-                initialValue: true,
+              SettingsTile.navigation(
                 leading: const Icon(Icons.format_paint),
-                title: const Text("Enable custom theme"),
+                title: const Text("Theme"),
+                value: Text(preferences.getString("theme")!),
               ),
             ],
           ),

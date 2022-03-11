@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class InitScreen extends StatelessWidget {
   const InitScreen({Key? key}) : super(key: key);
@@ -30,6 +31,16 @@ class Init {
   }
 
   static Future<void> _initSettings() async {
-    await Future.delayed(const Duration(seconds: 3));
+    final preferences = await SharedPreferences.getInstance();
+
+    final List<String>? lang = preferences.getStringList("lang");
+    if (lang == null) {
+      preferences.setStringList("lang", ["system", "System"]);
+    }
+
+    final String? theme = preferences.getString("theme");
+    if (theme == null) {
+      preferences.setString("theme", "system");
+    }
   }
 }

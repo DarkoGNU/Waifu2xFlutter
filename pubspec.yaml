@@ -5,7 +5,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
-version: 1.0.0+1
+version: 0.2.0
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -14,6 +14,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter         # Add this line
 
 dev_dependencies:
   flutter_test:
@@ -22,6 +24,9 @@ dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices.
   flutter_lints: ^1.0.0
+
+  # Localization
+  intl: ^0.17.0
 
   # Used for picking images
   image_picker: ^0.8.4
@@ -39,10 +44,12 @@ dev_dependencies:
   shared_preferences: ^2.0.13
 
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application
   uses-material-design: true
+
+  # Localization
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
