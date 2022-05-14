@@ -1,6 +1,6 @@
 # waifu2x_flutter
 
-Waifu2x GUI in Flutter. The project was abandoned by me due to technical difficulties. Basic GUI is done, waifu2x isn't implemented.
+Waifu2x GUI in Flutter. Basic GUI is done, waifu2x isn't implemented. I'm currently not working on waifu2x_flutter, but I want to finish it one day.
 
 ## Screenshots
 
